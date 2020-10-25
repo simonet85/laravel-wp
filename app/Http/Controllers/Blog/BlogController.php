@@ -13,10 +13,15 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $limit = 3; 
     public function index()
     {
-        $posts = Post::all();
+       
+        $posts = Post::with('author')->latestFirst()->simplePaginate($this->limit);
         return view('blog.index')->with('posts', $posts);
+        // \DB::enableQueryLog();
+        //  view('blog.index')->with('posts', $posts)->render();
+        // dd(\DB::getQueryLog());
     }
 
     /**
