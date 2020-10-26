@@ -1,36 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Category;
 
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BlogController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected $limit = 2; 
     public function index()
     {
-        $categories = Category::with(['posts' => function($query){
-            $query->published();
-        }])->orderBy('title', 'asc')->get();
-
-       
-        $posts = Post::with('author')->latestFirst()->published()->simplePaginate($this->limit);
-
-      
-        return view('blog.index')
-                                ->with('posts', $posts)
-                                ->with('categories', $categories);
-        // \DB::enableQueryLog();
-        //  view('blog.index')->with('posts', $posts)->render();
-        // dd(\DB::getQueryLog());
+        //
     }
 
     /**
@@ -60,11 +46,21 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    protected $limit = 2;
+    public function show($id)
     {
-        
-        // $post  = Post::published()->findOrFail($id);
-        return view('blog.post')->with('post', $post);
+        $posts = Post::with('author')->latestFirst()
+        ->published()
+        ->where('category_id', $id)
+        ->simplePaginate($this->limit);
+
+        $categories = Category::with(['posts' => function($query){
+            $query->published();
+        }])->orderBy('title', 'asc')->get();
+
+       
+        return view('blog.index')->with('posts', $posts)
+                                ->with('categories', $categories);
     }
 
     /**

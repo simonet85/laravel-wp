@@ -13,6 +13,8 @@
 
 Route::resource('blog','Blog\BlogController');
 
+Route::resource('category','Category\CategoryController');
+
 Route::get('/', ['uses'=>'Blog\BlogController@index']);
 
 Route::get('/post', function () {
