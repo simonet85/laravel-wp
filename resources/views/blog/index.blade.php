@@ -9,14 +9,14 @@
                 @if(!file_exists( public_path().'/assets/img'.$post->image ))
                 
                 <div class="post-item-image">
-                    <a href="{{route('blog.show',['blog'=>$post->id])}}">
+                    <a href="{{route('blog.show',['blog'=>$post->slug])}}">
                         <img src="{{asset('assets/img'.'/'.$post->image)}}" >
                     </a>
                 </div>
                 @endif
                 <div class="post-item-body">
                     <div class="padding-10">
-                        <h2><a href="{{route('blog.show',['blog'=>$post->id])}}">{{$post->title}}</a></h2>
+                        <h2><a href="{{route('blog.show',['blog'=>$post->slug])}}">{{$post->title}}</a></h2>
                         <p>{{$post->excerpt}}</p>
                     </div>
 
@@ -30,7 +30,7 @@
                             </ul>
                         </div>
                         <div class="pull-right">
-                            <a href="{{route('blog.show',['blog'=>$post->id])}}">Continue Reading &raquo;</a>
+                            <a href="{{route('blog.show',['blog'=>$post->slug])}}">Continue Reading &raquo;</a>
                         </div>
                     </div>
                 </div>
