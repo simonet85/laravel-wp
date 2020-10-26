@@ -13,7 +13,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $limit = 3; 
+    protected $limit = 2; 
     public function index()
     {
        
@@ -53,7 +53,9 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $post  = Post::findOrFail($id);
+        return view('blog.post')->with('post', $post);
     }
 
     /**
