@@ -22,8 +22,9 @@ class BlogController extends Controller
         }])->orderBy('title', 'asc')->get();
 
        
-        $posts = Post::with('author')->latestFirst()->published()->simplePaginate($this->limit);
-
+        $posts = Post::with('author')->latestFirst()
+                                    ->published()
+                                    ->simplePaginate($this->limit);
       
         return view('blog.index')
                                 ->with('posts', $posts)
@@ -62,9 +63,13 @@ class BlogController extends Controller
      */
     public function show(Post $post)
     {
+        $categories = Category::with(['posts' => function($query){
+            $query->published();
+        }])->orderBy('title', 'asc')->get();
         
         // $post  = Post::published()->findOrFail($id);
-        return view('blog.post')->with('post', $post);
+        return view('blog.post')->with('post', $post)
+                                ->with('categories', $categories);
     }
 
     /**

@@ -20,7 +20,7 @@
                     @foreach($categories as $category)
                     @if(($category->posts->count()) > 0)
                     <li>
-                        <a href="{{route('category.show',["category"=>$category->id])}}"><i class="fa fa-angle-right"></i> {{$category->title}}</a>
+                        <a href="{{route('category.show',["category"=>$category->slug])}}"><i class="fa fa-angle-right"></i> {{$category->title}}</a>
                         <span class="badge pull-right">{{$category->posts->count()}}</span>
                     </li>
                     @endif

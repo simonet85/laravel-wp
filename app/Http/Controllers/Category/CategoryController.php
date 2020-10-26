@@ -47,12 +47,20 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $limit = 2;
-    public function show($id)
+    public function show(Category $category)
     {
-        $posts = Post::with('author')->latestFirst()
+        // $posts = Post::with('author')->latestFirst()
+        // ->published()
+        // ->where('category_id', $id)
+        // ->simplePaginate($this->limit);
+
+        $categoryName = $category->title;
+
+        $posts = $category->posts()
+        ->with('author')
+        ->latestFirst()
         ->published()
-        ->where('category_id', $id)
-        ->simplePaginate($this->limit);
+        ->simplePaginate( $this->limit);
 
         $categories = Category::with(['posts' => function($query){
             $query->published();
@@ -60,7 +68,8 @@ class CategoryController extends Controller
 
        
         return view('blog.index')->with('posts', $posts)
-                                ->with('categories', $categories);
+                                ->with('categories', $categories)
+                                ->with('categoryName', $categoryName);
     }
 
     /**
