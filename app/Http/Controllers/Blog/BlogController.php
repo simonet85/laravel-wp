@@ -17,7 +17,7 @@ class BlogController extends Controller
     public function index()
     {
        
-        $posts = Post::with('author')->latestFirst()->simplePaginate($this->limit);
+        $posts = Post::with('author')->latestFirst()->published()->simplePaginate($this->limit);
         return view('blog.index')->with('posts', $posts);
         // \DB::enableQueryLog();
         //  view('blog.index')->with('posts', $posts)->render();
