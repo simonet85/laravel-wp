@@ -15,6 +15,8 @@ Route::resource('blog','Blog\BlogController');
 
 Route::resource('category','Category\CategoryController');
 
+Route::resource('author','Author\AuthorController');
+
 Route::get('/', ['uses'=>'Blog\BlogController@index']);
 
 Route::get('/post', function () {

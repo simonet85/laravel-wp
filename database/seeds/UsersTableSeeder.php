@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -16,16 +17,19 @@ class UsersTableSeeder extends Seeder
         // Insert 3 users in table
         DB::table('users')->insert([
             'name'=>'John Doe',
+            'slug'=>Str::slug('John Doe'),
             'email'=>'johndoe@gmail.com',
             'password'=>bcrypt('password')
         ]);
         DB::table('users')->insert([
             'name'=>'Francis Leon',
+            'slug'=>Str::slug('Francis Leon'),
             'email'=>'francisleon@gmail.com',
             'password'=>bcrypt('password')
         ]);
         DB::table('users')->insert([
             'name'=>'Adams Jonnson',
+            'slug'=>Str::slug('Adams Jonnson'),
             'email'=>'adamsjohnson@gmail.com',
             'password'=>bcrypt('password')
         ]);

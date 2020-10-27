@@ -17,7 +17,7 @@
 
                         <div class="post-meta no-border">
                             <ul class="post-meta-group">
-                                <li><i class="fa fa-user"></i><a href="#"> {{$post->author->name}}</a></li>
+                            <li><i class="fa fa-user"></i><a href="{{ route('author.show', ["author"=>$post->author->slug])}}"> {{$post->author->name}}</a></li>
                                 <li><i class="fa fa-clock-o"></i><time> {{$post->date}}</time></li>
                                 <li><i class="fa fa-tags"></i><a href="#"> Blog</a></li>
                                 <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
@@ -30,6 +30,8 @@
                 </div>
             </article>
 
+            @include('layouts.postauthor')
+           
             @include('layouts.comments')
         </div>
         @include('layouts.sidebar')
