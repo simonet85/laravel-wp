@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -44,5 +45,11 @@ class User extends Authenticatable
 
     public function getRouteKeyName(){
         return 'slug';
+    }
+
+    public function gravatar(){
+        $email = $this->email;
+        $grav_url = Gravatar::get($email);
+        return $grav_url;
     }
 }
