@@ -20,23 +20,23 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name'=>'John Doe',
             'slug'=>Str::slug('John Doe'),
-            'email'=>'johndoe@gmail.com',
+            'email'=>'kimouchristiansimonet@gmail.com',
             'password'=>bcrypt('password'),
-            'bio'=>$faker->text(rand(255, 300)),
+            'bio'=>$faker->text(rand(200, 255)),
         ]);
         DB::table('users')->insert([
             'name'=>'Francis Leon',
             'slug'=>Str::slug('Francis Leon'),
-            'email'=>'francisleon@gmail.com',
+            'email'=>'christian.85@live.fr',
             'password'=>bcrypt('password'),
-            'bio'=>$faker->text(rand(255, 300)),
+            'bio'=>$faker->text(rand(200, 255)),
         ]);
         DB::table('users')->insert([
             'name'=>'Adams Jonnson',
             'slug'=>Str::slug('Adams Jonnson'),
             'email'=>'adamsjohnson@gmail.com',
             'password'=>bcrypt('password'),
-            'bio'=>$faker->text(rand(255, 300)),
+            'bio'=>$faker->text(rand(200, 255)),
         ]);
     }
 }
