@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name'=>'John Doe',
             'slug'=>Str::slug('John Doe'),
-            'email'=>'kimouchristiansimonet@gmail.com',
+            'email'=>'gouejeanthomas@gmail.com',
             'password'=>bcrypt('password'),
             'bio'=>$faker->text(rand(200, 255)),
         ]);

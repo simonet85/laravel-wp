@@ -68,6 +68,7 @@ class BlogController extends Controller
         // }])->orderBy('title', 'asc')->get();
         
         // $post  = Post::published()->findOrFail($id);
+        $post->increment( 'view_count' );
         return view('blog.post')->with('post', $post)
                                 ->with('categories');
     }
