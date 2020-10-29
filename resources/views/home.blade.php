@@ -8,7 +8,7 @@
               <!-- /.box-header -->
               <div class="box-body ">
                     <h3>Welcome to MyBlog!</h3>
-                    <p class="lead text-muted">Hallo User, Welcome to MyBlog</p>
+                    <p class="lead text-muted">Hallo {{Auth::user()->name}}, Welcome to MyBlog</p>
 
                     <h4>Get started</h4>
                     <p><a href="#" class="btn btn-primary">Write your first blog post</a> </p>

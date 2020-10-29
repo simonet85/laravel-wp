@@ -31,3 +31,4 @@ Route::get('/post', function () {
 Auth::routes();
 
 Route::get('/home', 'Backend\HomeController@index')->name('home');
+Route::resource('admin', 'Backend\BackendController');

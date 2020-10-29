@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,9 +23,12 @@ class BackendController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $limit = 4;
     public function index()
     {
-        //
+        //Eagger loading-model injection -accessor and mutator
+        $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
+        return view('admin.blog')->with('posts', $posts);
     }
 
     /**
@@ -34,7 +38,7 @@ class BackendController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.form');
     }
 
     /**
@@ -67,7 +71,7 @@ class BackendController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -90,6 +94,6 @@ class BackendController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd($id);
     }
 }
