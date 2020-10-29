@@ -11,14 +11,23 @@
 |
 */
 
+
+
 Route::resource('blog','Blog\BlogController');
 
 Route::resource('category','Category\CategoryController');
 
 Route::resource('author','Author\AuthorController');
 
-Route::get('/', ['uses'=>'Blog\BlogController@index']);
+Route::get('/', ['uses'=>'Blog\BlogController@index', 'as'=>'blog']);
 
 Route::get('/post', function () {
     return view('blog.post');
 });
+
+// Route::get('/404', function () {
+//     return view('errors.404');
+// });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

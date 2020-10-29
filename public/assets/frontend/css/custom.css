@@ -1,9 +1,22 @@
+html {
+    position: relative;
+    min-height: 100%;
+  }
+
 body {
     font-family: 'Raleway', sans-serif;
     padding-top: 70px;
     color: #777;
-
+ /* Margin bottom by footer height */
+    margin-bottom: 60px;
     background: #fcfcfc  url("../img/body-bg.png");
+}
+
+.error-page{
+    margin-top:50px;
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
 }
 
 a {
@@ -24,6 +37,14 @@ a:hover {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1.5px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  /* Set the fixed height of the footer here */
+    height: 40px;
 }
 
 header .navbar-default, .post-item, .widget, footer, .post-author, .post-comments {

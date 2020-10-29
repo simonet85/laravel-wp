@@ -26,9 +26,8 @@ class BlogController extends Controller
                                     ->published()
                                     ->simplePaginate($this->limit);
       
-        return view('blog.index')
-                                ->with('posts', $posts)
-                                ->with('categories', $categories);
+        return view('blog.index')->with('posts', $posts)
+                           ->with('categories', $categories);
         // \DB::enableQueryLog();
         //  view('blog.index')->with('posts', $posts)->render();
         // dd(\DB::getQueryLog());

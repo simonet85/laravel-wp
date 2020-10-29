@@ -37,10 +37,10 @@
                 <ul class="popular-posts">
                     @foreach($popularPosts as $post)
                     <li>
-                        @if(!file_exists( public_path().'/assets/img'.$post->image ))
+                        @if(!file_exists( public_path().'/assets/frontend/img'.$post->image ))
                         <div class="post-image">
                         <a href="{{route('blog.show',['blog'=>$post->slug])}}">
-                                <img src="{{asset('assets/img'.'/'.$post->image)}}" />
+                                <img src="{{asset('assets/frontend/img'.'/'.$post->image)}}" />
                             </a>
                         </div>
                         @endif

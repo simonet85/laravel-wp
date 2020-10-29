@@ -6,8 +6,8 @@
 
     <link href="{{url('https://fonts.googleapis.com/css?family=Raleway:400,700')}}" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/custom.css')}}">
 </head>
 <body>
     <header>
@@ -27,7 +27,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="the-navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="{{route('blog.index')}}">Blog</a></li>
+                <li class="active"><a href="{{url('/')}}">Blog</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
               </ul>
@@ -57,7 +57,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
 </body>
 </html>

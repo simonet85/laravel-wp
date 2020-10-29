@@ -7,7 +7,7 @@
             <article class="post-item post-detail">
                 <div class="post-item-image">
                     <a href="#">
-                        <img src="{{asset('assets/img'.'/'.$post->image)}}" alt="">
+                        <img src="{{asset('assets/frontend/img'.'/'.$post->image)}}" alt="">
                     </a>
                 </div>
 
