@@ -14,7 +14,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $limit = 2; 
+    protected $limit = 4; 
     public function index()
     {
         $categories = Category::with(['posts' => function($query){

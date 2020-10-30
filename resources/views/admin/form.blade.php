@@ -6,7 +6,7 @@
           <div class="col-xs-9">
               <div class="box">
                   <!-- form start -->
-              <form role="form" method="POST" action="{{ route('admin.store')}}" class="was-validated">
+              <form role="form" method="POST" action="{{ route('admin.store')}}" enctype="multipart/form-data" >
                 @csrf
                     <div class="box-body">
                     <div class="form-group @error('title') has-error  @enderror">
@@ -71,11 +71,22 @@
 
                       <div class="form-group @error('body') has-error  @enderror">
                         <label for="body">Body</label>
-                      <textarea value="{{old('body')}}" name="body" id="body" rows="10" class="form-control " aria-labelledby="body"
-                        placeholder="Enter your complete post here."></textarea>
-                        @error('body')
-                        <span class="help-block " id="body">
-                          {{$errors->first('body')}}
+                        <textarea value="{{old('body')}}" name="body" id="body" rows="10" class="form-control " aria-labelledby="body"
+                          placeholder="Enter your complete post here."></textarea>
+                          @error('body')
+                          <span class="help-block " id="body">
+                            {{$errors->first('body')}}
+                          </span>
+                          @enderror
+                      </div>
+
+                      <div class="form-group @error('image') has-error  @enderror">
+                        <label for="image">image</label>
+                        <input type="file" name="image"  class="form-control" id="image" aria-labelledby="image" >
+
+                        @error('image')
+                        <span class="help-block " id="image">
+                          {{$errors->first('image')}}
                         </span>
                         @enderror
                       </div>

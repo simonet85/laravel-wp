@@ -62,10 +62,18 @@ class BackendController extends Controller
             "published_at" => "date|nullable",
             "category_id" => "required",
             "excerpt"=>"required|string",
+            "image"=>"mimes:jpeg,png,bmp,jpg|nullable",
             "body"=>"required|string",
         ]);
 
-        
+        if ($request->hasFile('image')) {
+            $image = $request->file("image");
+            $fileName= $image->getClientOriginalName();
+            $destination = public_path('/assets/frontend/img');
+            $image->move($destination, $fileName);
+        }
+
+      
         $create = Post::create([
             "title"=>$request->title,
             "slug"=>$request->slug,
@@ -74,6 +82,7 @@ class BackendController extends Controller
             "excerpt"=>$request->excerpt,
             "body"=>$request->body,
             "author_id"=>auth()->user()->id,
+            "image" => $fileName,
         ]);
 
         // $request->user()->posts()->create();

@@ -34,7 +34,7 @@
                       <tr>
                         <th>Action</th>
                         <th>Title</th>
-                        <th>Excerpt</th>
+                        <th>Author</th>
                         <th>Category</th>
                         <th width="170">Date</th>
                       </tr>
@@ -60,7 +60,7 @@
                             </a>
                         </td>
                         <td>{{$post->title}}</td>
-                        <td>{{$post->excerpt}}</td>
+                        <td>{{$post->author->name}}</td>
                         <td>{{$post->category->title}}</td>
                         <td><abbr title="{{$post->dateFormatted(true)}}">{{$post->dateFormatted()}}</abbr> | {!!$post->publicationLabel()!!}</td>
                       </tr>
