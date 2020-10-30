@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Creativeorange\Gravatar\GravatarServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

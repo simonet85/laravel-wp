@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 
 class BackendController extends Controller
 {
@@ -68,9 +70,17 @@ class BackendController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file("image");
-            $fileName= $image->getClientOriginalName();
+            $fileName = $image->getClientOriginalName();
             $destination = public_path('/assets/frontend/img');
-            $image->move($destination, $fileName);
+            $successUpload = $image->move($destination, $fileName);
+            // video 43
+            if ($successUpload) {
+                $fileExtension = $image->getClientOriginalExtension();
+                $thumbnail = str_replace(".{$fileExtension} ", "_thumb.{$fileExtension}",  $fileName);
+                Image::make( $destination.'/'.$fileName)
+                        ->resize(250, 170)
+                        ->save( $destination.'/'.$thumbnail);
+            }
         }
 
       
