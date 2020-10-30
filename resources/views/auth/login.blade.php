@@ -14,27 +14,26 @@
     <form action="{{ route('login') }}" method="post" class="was-validated">
         @csrf
 
-      <div class="form-group{{$errors->has('email') ? 'has-error' : ''}} has-feedback">
-        <input type="email" class="form-control  
-        @error('email') is-invalid @enderror" placeholder="Email" name="email"
+      <div class="form-group  @error('email') has-error @enderror has-feedback">
+        <input type="email" class="form-control" placeholder="Email" name="email" id="email"
         value="{{ old('email') }}"  autocomplete="email" autofocus
         >
         <span class="fa fa-envelope form-control-feedback"></span>
 
         @error('email')
-        <span class="help-block">
+        <span class="help-block" id="email">
           <strong>{{ $errors->first('email')}} </strong>
         </span>
         @enderror
       </div>
 
-      <div class="form-group{{$errors->has('password') ? 'has-error' : ''}} has-feedback">
-        <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password"  autocomplete="current-password"
+      <div class="form-group @error('password') has-error @enderror has-feedback">
+        <input type="password" class="form-control " id="password" placeholder="Password" name="password"  autocomplete="current-password" aria-labelledby="password"
         >
         <span class="fa fa-lock form-control-feedback"></span>
 
         @error('email')
-        <span class="help-block">
+        <span class="help-block" id="password">
           <strong>{{ $errors->first('password')}} </strong>
         </span>
         @enderror

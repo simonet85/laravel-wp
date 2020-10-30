@@ -11,6 +11,7 @@
                     </div>
                     <div class="pull-right">
                     <form accept-charset="utf-8" method="post" class="form-inline" id="form-filter" action="#">
+                      @csrf
                         <div class="input-group">
                             <input type="hidden" name="search">
                             <input type="text" name="keywords" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search..." value="">
@@ -23,7 +24,7 @@
                 </div>
               <!-- /.box-header -->
               <div class="box-body table-responsive">
-                @if( $posts->count())
+                @if( ! $posts->count())
                 <div class="alert alert-danger text-center">
                   No Posts Found!
                 </div>
@@ -39,9 +40,11 @@
                       </tr>
                   </thead>
                   <tbody>
+                   
                     @foreach($posts as $post)
                       <tr>
                         <td width="70">
+                         
                         <a title="Edit" class="btn btn-xs btn-default edit-row" 
                         href="{{ route('admin.edit',['admin'=>$post->id])}}">
                                 <i class="fa fa-edit"></i>

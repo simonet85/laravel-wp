@@ -6,31 +6,84 @@
           <div class="col-xs-9">
               <div class="box">
                   <!-- form start -->
-                  <form role="form">
+              <form role="form" method="POST" action="{{ route('admin.store')}}" class="was-validated">
+                @csrf
                     <div class="box-body">
-                      <div class="form-group">
+                    <div class="form-group @error('title') has-error  @enderror">
                         <label for="title">Title</label>
-                        <input type="text" placeholder="Enter Title here" id="title" class="form-control">
-                      </div>
-                      <div class="form-group">
-                        <label for="slug">Slug</label>
-                        <input type="text" id="slug" class="form-control">
 
-                        <p class="help-block">Example block-level help text here.</p>
+                        <input value="{{old('title')}}" type="text" name="title" placeholder="Enter Title here" id="title" class="form-control"
+                        aria-labelledby="title">
+
+                        @error('title')
+                        <span class="help-block " id="title">
+                            {{$errors->first('title')}}
+                        </span>
+                        @enderror
+
                       </div>
-                      <div class="form-group">
+
+                      <div class="form-group @error('slug') has-error  @enderror">
+                        <label for="slug">Slug</label>
+                        <input value="{{old('slug')}}" type="text" name="slug"  class="form-control" id="slug" aria-labelledby="slug" placeholder="Example: web-design">
+
+                        @error('slug')
+                        <span class="help-block " id="slug">
+                          {{$errors->first('slug')}}
+                        </span>
+                        @enderror
+                      </div>
+
+                      <div class="form-group @error('published_at') has-error  @enderror">
+                        <label for="published_at">Published date</label>
+                        <input value="{{old('published_at')}}" type="date" name="published_at"  class="form-control" id="published_at" aria-labelledby="published_at" placeholder="Choose the publication date">
+
+                        @error('published_at')
+                        <span class="help-block " id="published_at">
+                          {{$errors->first('published_at')}}
+                        </span>
+                        @enderror
+                      </div>
+                      <div class="form-group @error('category_id') has-error  @enderror">
+                        <label for="category_id">Categories</label>
+                        <select class="form-control" name="category_id" id="category_id" aria-labelledby="category_id">
+                          <option >Choose a category</option>
+                          @foreach($categories as $category)
+                          <option value="{{$category->id}}">{{$category->title}}</option>
+                          @endforeach
+                        </select>
+                        @error('category_id')
+                        <span class="help-block " id="category_id">
+                          {{$errors->first('category_id')}}
+                        </span>
+                        @enderror
+                      </div>
+                     
+                      <div class="form-group @error('excerpt') has-error  @enderror">
                         <label for="body">Excerpt</label>
-                        <textarea name="excerpt" id="excerpt" rows="5" class="form-control"></textarea>
+                        <textarea value="{{old('excerpt')}}" name="excerpt" id="excerpt" rows="5" class="form-control " aria-labelledby="excerpt" placeholder="Enter a short description of your post."></textarea>
+                        @error('excerpt')
+                        <span class="help-block " id="excerpt" class="sr-only">
+                          {{$errors->first('excerpt')}}
+                        </span>
+                        @enderror
                       </div>
-                      <div class="form-group">
+
+                      <div class="form-group @error('body') has-error  @enderror">
                         <label for="body">Body</label>
-                        <textarea name="body" id="body" rows="10" class="form-control"></textarea>
+                      <textarea value="{{old('body')}}" name="body" id="body" rows="10" class="form-control " aria-labelledby="body"
+                        placeholder="Enter your complete post here."></textarea>
+                        @error('body')
+                        <span class="help-block " id="body">
+                          {{$errors->first('body')}}
+                        </span>
+                        @enderror
                       </div>
                     </div>
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                      <button class="btn btn-primary" type="submit">Submit</button>
+                      <button class="btn btn-primary"  type="submit">Submit</button>
                     </div>
                   </form>
                 </div>

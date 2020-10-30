@@ -10,10 +10,13 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
+@notify_js
+@notify_render
 <script src="{{asset('assets/backend/js/jquery-2.2.3.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{asset('assets/backend/js/bootstrap.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+
 </body>
 </html>
