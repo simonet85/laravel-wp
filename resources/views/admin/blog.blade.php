@@ -23,6 +23,11 @@
                 </div>
               <!-- /.box-header -->
               <div class="box-body table-responsive">
+                @if( $posts->count())
+                <div class="alert alert-danger text-center">
+                  No Posts Found!
+                </div>
+                @else
                 <table class="table table-bordered table-condesed">
                   <thead>
                       <tr>
@@ -41,8 +46,10 @@
                         href="{{ route('admin.edit',['admin'=>$post->id])}}">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a  title="Delete" class="btn btn-xs btn-danger delete-row" href="{{ route('admin.destroy',['admin'=>$post->id])}}" 
-                            onclick=" event.preventDefault(); 
+                            <a  title="Delete" class="btn btn-xs btn-danger delete-row" 
+                            href="{{ route('admin.destroy',['admin'=>$post->id])}}" 
+                            onclick=" 
+                            event.preventDefault(); 
                             document.getElementById('form-delete').submit(); 
                             return confirm('Do you really want  to delete ?');
                             ">
@@ -63,12 +70,13 @@
                     <span class="label label-warning">Draft</span> --}}
                   </tbody>
                 </table>
+                @endif
               </div>
               <!-- /.box-body -->
               <div class="box-footer clearfix">
                
                   {{$posts->links()}}
-                  <?php $countItem = $posts->count();?>
+                  
                   <div class=" pull-right">
                   <small> {{ $countItem}} {{ str_plural('Post',  $countItem)}}</small>
                   </div>
@@ -80,4 +88,10 @@
       <!-- ./row -->
     </section>
     <!-- /.content -->
+ @endsection
+
+ @section('scripts')
+     <script type="text/javascript">
+       $('ul.pagination').addClass('no-margin pagination-sm');
+     </script>
  @endsection

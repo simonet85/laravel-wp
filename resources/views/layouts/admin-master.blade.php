@@ -10,7 +10,10 @@
       </h1>
       <ol class="breadcrumb">
         <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+        <li ><i class="fa fa-chevron"></i> Blog</li>
+        <li ><i class="fa fa-chevron"></i> All Posts</li>
       </ol>
+     
     </section> --}}
 
     @yield('admin-content')
@@ -18,3 +21,4 @@
   </div>
   <!-- /.content-wrapper -->
   @include('layouts.admin-footer')
+  @yield('scripts')

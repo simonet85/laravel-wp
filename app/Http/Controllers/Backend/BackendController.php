@@ -27,8 +27,10 @@ class BackendController extends Controller
     public function index()
     {
         //Eagger loading-model injection -accessor and mutator
+        
         $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
-        return view('admin.blog')->with('posts', $posts);
+        $countItem = Post::count();
+        return view('admin.blog')->with('posts', $posts)->with('countItem', $countItem);
     }
 
     /**
