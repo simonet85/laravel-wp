@@ -6,7 +6,7 @@
           <div class="col-xs-9">
               <div class="box">
                   <!-- form start -->
-              <form role="form" method="POST" action="{{ route('admin.store')}}" enctype="multipart/form-data" >
+              <form id="form-submit" role="form" method="POST" action="{{ route('admin.store')}}" enctype="multipart/form-data" >
                 @csrf
                     <div class="box-body">
                     <div class="form-group @error('title') has-error  @enderror">
@@ -34,37 +34,6 @@
                         @enderror
                       </div>
 
-                      <div class="form-group @error('published_at') has-error  @enderror">
-                        <label for="published_at">Published date</label>
-                        {{-- <div class='input-group date' id='datetimepicker1'> --}}
-                          <input value="{{old('published_at')}}" type="date" name="published_at"  class="form-control" id="published_at" aria-labelledby="published_at" placeholder="Choose the publication date">
-
-                          {{-- <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div> --}}
-
-                        @error('published_at')
-                        <span class="help-block " id="published_at">
-                          {{$errors->first('published_at')}}
-                        </span>
-                        @enderror
-                      </div>
-                      <div class="form-group @error('category_id') has-error  @enderror">
-                        <label for="category_id">Categories</label>
-                        <select class="form-control" name="category_id" id="category_id" aria-labelledby="category_id">
-                          <option >Choose a category</option>
-                          @foreach($categories as $category)
-                          <option value="{{$category->id}}">{{$category->title}}</option>
-                          @endforeach
-                        </select>
-                        @error('category_id')
-                        <span class="help-block " id="category_id">
-                          {{$errors->first('category_id')}}
-                        </span>
-                        @enderror
-                      </div>
-                     
                       <div class="form-group @error('excerpt') has-error  @enderror">
                         <label for="body">Excerpt</label>
                         <textarea value="{{old('excerpt')}}" name="excerpt" id="excerpt" rows="5" class="form-control excerpt" aria-labelledby="excerpt" placeholder="Enter a short description of your post."></textarea>
@@ -85,9 +54,74 @@
                           </span>
                           @enderror
                       </div>
-                      <label for="image">Feature image</label>
-                      <div class="form-group @error('image') has-error  @enderror">
-                        
+                     
+                    </div>
+                    <!-- /.box-body -->
+                   
+                    <div class="box-footer">
+                      <button class="btn btn-primary"  type="submit">Submit</button>
+                    </div>
+                 
+                </div>
+          </div>
+          <div class="col-md-3">
+              <div class="box">
+                  <div class="box-header with-border">
+                      <h3 class="box-title">Publish</h3>
+                  </div>
+                  <div class="box-body">
+                    <div class="form-group @error('published_at') has-error  @enderror">
+                      <label for="published_at">Published date</label>
+                      {{-- <div class='input-group date' id='datetimepicker1'> --}}
+                        <input value="{{old('published_at')}}" type="date" name="published_at"  class="form-control" id="published_at" aria-labelledby="published_at" placeholder="Choose the publication date">
+
+                        {{-- <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                          </span>
+                        </div> --}}
+
+                      @error('published_at')
+                      <span class="help-block " id="published_at">
+                        {{$errors->first('published_at')}}
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="box-footer clearfix">
+                      <div class="pull-left">
+                          <a href="{{ route('admin.store')}}" onclick="draftFunction(event);" class="btn btn-default">Save Draft</a>
+                      </div>
+                      <div class="pull-right">
+                          <a href="{{ route('admin.store')}}" class="btn btn-primary" 
+                          onclick="event.preventDefault(); document.getElementById('form-submit').submit();">Publish</a>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="box">
+                  <div class="box-header with-border">
+                      <h3 class="box-title">Category</h3>
+                  </div>
+                  <div class="form-group @error('category_id') has-error  @enderror">
+                    <select class="form-control" name="category_id" id="category_id" aria-labelledby="category_id">
+                      <option value=" " selected>Choose a category</option>
+                      @foreach($categories as $category)
+                      <option value="{{$category->id}}">{{$category->title}}</option>
+                      @endforeach
+                    </select>
+                    @error('category_id')
+                    <span class="help-block " id="category_id">
+                      {{$errors->first('category_id')}}
+                    </span>
+                    @enderror
+                  </div>
+                 
+              </div>
+              <div class="box">
+                  <div class="box-header with-border">
+                      <h3 class="box-title">Feature Image</h3>
+                  </div>
+                  <div class="box-body text-center">
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                           <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
                             <img src="https://via.placeholder.com/200x150?text=No+Image"  alt="feature image">
@@ -99,80 +133,11 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- /.box-body -->
-                   
-                    <div class="box-footer">
-                      <button class="btn btn-primary"  type="submit">Submit</button>
-                    </div>
-                  </form>
-                </div>
-          </div>
-          <div class="col-md-3">
-              <div class="box">
-                  <div class="box-header with-border">
-                      <h3 class="box-title">Publish</h3>
-                  </div>
-                  <div class="box-body">
-                      <div class="form-group">
-                        <label for="published_at">Publish date</label>
-                        <input type="text" class="form-control">
-                      </div>
-                  </div>
-                  <div class="box-footer clearfix">
-                      <div class="pull-left">
-                          <a href="#" class="btn btn-default">Save Draft</a>
-                      </div>
-                      <div class="pull-right">
-                          <a href="#" class="btn btn-primary">Publish</a>
-                      </div>
-                  </div>
-              </div>
-              <div class="box">
-                  <div class="box-header with-border">
-                      <h3 class="box-title">Category</h3>
-                  </div>
-                  <div class="box-body">
-                      <div class="radio">
-                          <label>
-                            <input type="radio" name="category" id="category-1" value="option1">
-                            Web Programming
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <label>
-                            <input type="radio" name="category" id="category-2" value="option1">
-                            Web Design
-                          </label>
-                      </div>
-                      <div class="radio">
-                          <label>
-                            <input type="radio" name="category" id="category-3" value="option1">
-                            Java
-                          </label>
-                      </div>
-                  </div>
-              </div>
-              <div class="box">
-                  <div class="box-header with-border">
-                      <h3 class="box-title">Feature Image</h3>
-                  </div>
-                  <div class="box-body text-center">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                            <img src="http://placehold.it/200x200" width="100%" alt="...">
-                        </div>
-                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                        <div>
-                            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
-                            <input type="file" name="...">
-                            </span>
-                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                        </div>
-                    </div>
                   </div>
               </div>
           </div>
+        
+        </form>
         </div>
       <!-- ./row -->
     </section>
@@ -197,6 +162,13 @@
    var simplemde1 = new SimpleMDE({ element: $("#excerpt")[0] });
    var simplemde2 = new SimpleMDE({ element: $("#body")[0] });
  </script>
+<script>
+  function draftFunction(){
+    event.preventDefault();
+    document.getElementById('published_at').value = 'null';
+    document.getElementById('form-submit').submit();
+  }
+</script>
 
 <script type="text/javascript">
   $(function () {
