@@ -94,7 +94,10 @@
  @endsection
 
  @section('scripts')
+
      <script type="text/javascript">
        $('ul.pagination').addClass('no-margin pagination-sm');
-     </script>
+      </script>
+
+     
  @endsection

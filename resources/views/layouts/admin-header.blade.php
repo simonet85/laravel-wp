@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+ 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>@yield('title','MY BLOG')</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -19,7 +19,13 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('assets/backend/css/skins/_all-skins.min.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{asset('assets/backend/../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="{{url('https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js')}}"></script>
+  <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css')}}" />
+
+  <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css')}}" />
+  
   @notify_css
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
