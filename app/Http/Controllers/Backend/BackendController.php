@@ -27,16 +27,25 @@ class BackendController extends Controller
      * @return \Illuminate\Http\Response
      */
     protected $limit = 4;
-    public function index()
+    public function index(Request $request)
     {
-        //Eagger loading-model injection -accessor and mutator
-        
-        $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
-        $countItem = Post::count();
        
-        return view('admin.index')->with('posts', $posts)
-                                 ->with('countItem', $countItem);
+        
+        if( ($status  = $request->get('status') ) && $status == 'trash'){
+           
+            $posts = Post::onlyTrashed()->with('category', 'author')->latest()->paginate($this->limit);
+            $countItem = Post::onlyTrashed()->count();
+            $onlyTrashed = TRUE;
+        }else{
+            $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
+            $countItem = Post::count();
+            $onlyTrashed = FALSE;
+        }
+
+        return view('admin.index', compact('posts', 'countItem', 'onlyTrashed'));
     }
+        
+       
 
     /**
      * Show the form for creating a new resource.
@@ -221,5 +230,20 @@ class BackendController extends Controller
         Post::findOrfail($id)->delete();
         // session()->flash('trash-message', 'Post Moved to Trash ...');
         return redirect('admin')->with('trash-message',['post moved to Trash ...',$id]);
+    }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function forcedestroy($id)
+    {
+        
+        Post::withTrashed()->findOrfail($id)->forceDelete();
+        // session()->flash('trash-message', 'Post Moved to Trash ...');
+        notify()->success('Success!', 'Post Deleted successfully');
+        return redirect('/trash/?status=trash');
     }
 }

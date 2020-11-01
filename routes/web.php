@@ -33,3 +33,7 @@ Auth::routes();
 Route::get('/home', 'Backend\HomeController@index')->name('home');
 Route::resource('admin', 'Backend\BackendController');
 Route::put('/admin/restore/{id}', 'Backend\BackendController@restore')->name('admin.restore');
+
+Route::get('/trash', 'Backend\BackendController@index')->name('trash');
+
+Route::delete('/admin/force-destroy/{id}', 'Backend\BackendController@forcedestroy')->name('admin.force-destroy');

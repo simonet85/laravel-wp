@@ -5,11 +5,11 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
+                <div class="box-header clearfix">
                     <div class="pull-left">
                         <a id="add-button" title="Add New" class="btn btn-success" href="{{route('admin.create')}}"><i class="fa fa-plus-circle"></i> Add New</a>
                     </div>
-                    <div class="pull-right">
+                    {{-- <div class="pull-right">
                     <form accept-charset="utf-8" method="post" class="form-inline" id="form-filter" action="#">
                       @csrf
                         <div class="input-group">
@@ -21,6 +21,11 @@
                         </div>
                     </form>
                    
+                    </div> --}}
+
+                    <div class="pull-right">
+                      <a href="{{url('/trash/?status=all')}}" class="btn btn-sm btn-primary">All</a>
+                      <a href="{{url('/trash/?status=trash')}}" class="btn btn-sm btn-primary">Trash</a>
                     </div>
                 </div>
               <!-- /.box-header -->
@@ -49,58 +54,11 @@
                   No Posts Found!
                 </div>
                 @else
-                <table class="table table-bordered table-condesed">
-                  <thead>
-                      <tr>
-                        <th>Action</th>
-                        <th></th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Category</th>
-                        <th width="170">Date</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                   {{-- {{dd($posts)}} --}}
-                    @foreach($posts as $post)
-                      <tr>
-                        <td width="70">
-                         
-                         
-                          <button name="edit" type="submit" title="Edit" class="btn btn-xs btn-default edit-row" >
-                            <i class="fa fa-edit"></i>
-                          </button>
-                    
-                          
-                        </td>
-                        <td colspan="2">
-                        <form id="form-delete" 
-                          action="{{ route('admin.destroy',['admin'=>$post->id]) }}" method="POST">
-                          @csrf
-                          @method("DELETE")
-
-                          <button name="delete" type="submit" title="Delete" class="btn btn-xs btn-danger delete-row" 
-                          onsubmit="return confirm('Do you really want to delete?');"
-                          >
-                            <i class="fa fa-times"></i>
-                          </button>
-                         
-                        </form>
-                        </td>
-                        <td>{{$post->title}}</td>
-                        <td>{{$post->author->name}}</td>
-                        <td>{{$post->category->title}}</td>
-                        <td><abbr title="{{$post->dateFormatted(true)}}">{{$post->dateFormatted()}}</abbr> | {!!$post->publicationLabel()!!}</td>
-                      </tr>
-                     
-                      
-                     
-                    @endforeach
-                   
-                    {{-- <span class="label label-success">Published</span>
-                    <span class="label label-warning">Draft</span> --}}
-                  </tbody>
-                </table>
+                  @if( $onlyTrashed )
+                    @include('admin.table-trashed')
+                  @else
+                    @include('admin.table')
+                  @endif
                 @endif
               </div>
               <!-- /.box-body -->
