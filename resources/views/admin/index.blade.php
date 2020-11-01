@@ -1,154 +1,117 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>MyBlog | Dashboard</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{asset('assets/backend/css/bootstrap.min.css')}}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('assets/backend/plugins/font-awesome/css/font-awesome.min.css')}}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('assets/backend/css/AdminLTE.min.css')}}">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{asset('assets/backend/css/skins/_all-skins.min.css')}}">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{asset('assets/backend/../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="{{ur('/')}}" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>M</b>B</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>MY</b>BLOG</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <!-- <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a> -->
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{asset('assets/backend/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="{{asset('assets/backend/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{asset('assets/backend/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li>
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pencil"></i>
-            <span>Blog</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> All Posts</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Add New</a></li>
-          </ul>
-        </li>
-        <li><a href="#"><i class="fa fa-folder"></i> <span>Categories</span></a></li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Dasbhboard
-      </h1>
-      <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
-      </ol>
-    </section>
-
-
-    
+@extends('layouts.admin-master')
+@section('admin-content')
     <!-- Main content -->
     <section class="content">
         <div class="row">
           <div class="col-xs-12">
             <div class="box">
+                <div class="box-header">
+                    <div class="pull-left">
+                        <a id="add-button" title="Add New" class="btn btn-success" href="{{route('admin.create')}}"><i class="fa fa-plus-circle"></i> Add New</a>
+                    </div>
+                    <div class="pull-right">
+                    <form accept-charset="utf-8" method="post" class="form-inline" id="form-filter" action="#">
+                      @csrf
+                        <div class="input-group">
+                            <input type="hidden" name="search">
+                            <input type="text" name="keywords" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search..." value="">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default search-btn" type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                   
+                    </div>
+                </div>
               <!-- /.box-header -->
-              <div class="box-body ">
-                    <h3>Welcome to MyBlog!</h3>
-                    <p class="lead text-muted">Hallo User, Welcome to MyBlog</p>
+              <div class="box-body table-responsive">
 
-                    <h4>Get started</h4>
-                    <p><a href="#" class="btn btn-primary">Write your first blog post</a> </p>
+                @if(session('trash-message'))
+                
+                  <div class="alert alert-danger">
+                    <?php list($message, $postId) = session('trash-message'); ?>
+                    <strong>{{$message}} </strong>  
+                    <a href="{{route('admin.restore',['id'=>$postId])}}" style="color:#ffff; text-decoration: none;" class="alert-link pull-right"
+                      onclick="event.preventDefault();
+                      document.getElementById('restore-form').submit();
+                      " > <span class="glyphicon glyphicon-refresh"></span>Undo</a>
+
+                    <form id="restore-form" action="{{route('admin.restore',['id'=>$postId])}}" method="POST">
+                      @csrf
+                      @method("PUT")
+                    </form>
+
+                  </div>
+                @endif
+
+                @if( ! $posts->count())
+                <div class="alert alert-danger text-center">
+                  No Posts Found!
+                </div>
+                @else
+                <table class="table table-bordered table-condesed">
+                  <thead>
+                      <tr>
+                        <th>Action</th>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th width="170">Date</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                   {{-- {{dd($posts)}} --}}
+                    @foreach($posts as $post)
+                      <tr>
+                        <td width="70">
+                         
+                         
+                          <button name="edit" type="submit" title="Edit" class="btn btn-xs btn-default edit-row" >
+                            <i class="fa fa-edit"></i>
+                          </button>
+                    
+                          
+                        </td>
+                        <td colspan="2">
+                        <form id="form-delete" 
+                          action="{{ route('admin.destroy',['admin'=>$post->id]) }}" method="POST">
+                          @csrf
+                          @method("DELETE")
+
+                          <button name="delete" type="submit" title="Delete" class="btn btn-xs btn-danger delete-row" 
+                          onsubmit="return confirm('Do you really want to delete?');"
+                          >
+                            <i class="fa fa-times"></i>
+                          </button>
+                         
+                        </form>
+                        </td>
+                        <td>{{$post->title}}</td>
+                        <td>{{$post->author->name}}</td>
+                        <td>{{$post->category->title}}</td>
+                        <td><abbr title="{{$post->dateFormatted(true)}}">{{$post->dateFormatted()}}</abbr> | {!!$post->publicationLabel()!!}</td>
+                      </tr>
+                     
+                      
+                     
+                    @endforeach
+                   
+                    {{-- <span class="label label-success">Published</span>
+                    <span class="label label-warning">Draft</span> --}}
+                  </tbody>
+                </table>
+                @endif
               </div>
               <!-- /.box-body -->
+              <div class="box-footer clearfix">
+               
+                  {{$posts->links()}}
+                  
+                  <div class=" pull-right">
+                  <small> {{ $countItem}} {{ str_plural('Post',  $countItem)}}</small>
+                  </div>
+              </div>
             </div>
             <!-- /.box -->
           </div>
@@ -156,26 +119,19 @@
       <!-- ./row -->
     </section>
     <!-- /.content -->
+ @endsection
 
+ @section('scripts')
 
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.6
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="{{url('http://almsaeedstudio.com')}}">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+     <script type="text/javascript">
+       $('ul.pagination').addClass('no-margin pagination-sm');
+      </script>
 
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery 2.2.3 -->
-<script src="{{asset(assets('backend/js/jquery-2.2.3.min.js'))}}"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="{{asset(assets('backend/js/bootstrap.min.js'))}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset(assets('backend/js/app.min.js'))}}"></script>
-</body>
-</html>
+     <script>
+       function confirmDelete (event){
+        
+       
+       }
+      
+     </script>
+ @endsection

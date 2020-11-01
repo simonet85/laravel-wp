@@ -32,3 +32,4 @@ Auth::routes();
 
 Route::get('/home', 'Backend\HomeController@index')->name('home');
 Route::resource('admin', 'Backend\BackendController');
+Route::put('/admin/restore/{id}', 'Backend\BackendController@restore')->name('admin.restore');
