@@ -37,3 +37,4 @@ Route::put('/admin/restore/{id}', 'Backend\BackendController@restore')->name('ad
 Route::get('/trash', 'Backend\BackendController@index')->name('trash');
 
 Route::delete('/admin/force-destroy/{id}', 'Backend\BackendController@forcedestroy')->name('admin.force-destroy');
+Route::resource('categories', 'Backend\CategoryController');

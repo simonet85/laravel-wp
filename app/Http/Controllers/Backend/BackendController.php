@@ -26,7 +26,7 @@ class BackendController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $limit = 4;
+    protected $limit = 5;
     public function index(Request $request)
     {
        
