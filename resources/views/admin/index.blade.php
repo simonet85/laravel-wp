@@ -22,10 +22,23 @@
                     </form>
                    
                     </div> --}}
-
+                    {{-- <a href="{{url('/trash/?status=all')}}" class="btn btn-sm btn-primary">All</a>
+                    <a href="{{url('/trash/?status=trash')}}" class="btn btn-sm btn-primary">Trash</a>
+                    <a href="{{url('/trash/?status=published')}}" class="btn btn-sm btn-primary">Published</a>
+                    <a href="{{url('/trash/?status=scheduled')}}" class="btn btn-sm btn-primary">Scheduled</a>
+                    <a href="{{url('/trash/?status=draft')}}" class="btn btn-sm btn-primary">Draft</a> --}}
+                    {{-- $links[] =  "<a href=\"?status={$key}\">".ucwords($key)."({$value})</a>" ;
+                    <div class="pull-right"> --}}
                     <div class="pull-right">
-                      <a href="{{url('/trash/?status=all')}}" class="btn btn-sm btn-primary">All</a>
-                      <a href="{{url('/trash/?status=trash')}}" class="btn btn-sm btn-primary">Trash</a>
+                      {{-- {{dd($statusList)}} --}}
+                      <?php $links = [];?>
+                     @foreach($statusList as $key => $value)
+                        @if( $value ) 
+                        <?php $selected = Request::get( 'status' ) == $key ? 'selected-status' : '' ;?>
+                       <?php  $links[] =  "<a class=\"{$selected}\" href=\"?status={$key}\">".ucwords($key)."({$value})</a>" ;?>
+                        @endif
+                     @endforeach
+                     {!! implode(' | ', $links) !!}
                     </div>
                 </div>
               <!-- /.box-header -->
@@ -63,8 +76,8 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer clearfix">
-               
-                  {{$posts->links()}}
+               {{-- add appends(Request::query()) method to fix the pagination --}}
+                  {{$posts->appends( Request::query() )->links()}}
                   
                   <div class=" pull-right">
                   <small> {{ $countItem}} {{ str_plural('Post',  $countItem)}}</small>
@@ -85,11 +98,4 @@
        $('ul.pagination').addClass('no-margin pagination-sm');
       </script>
 
-     <script>
-       function confirmDelete (event){
-        
-       
-       }
-      
-     </script>
  @endsection

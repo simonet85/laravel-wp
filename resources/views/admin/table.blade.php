@@ -14,15 +14,17 @@
       @foreach($posts as $post)
         <tr>
           <td width="70">
-           
+            <form 
+            action="{{ route('admin.edit',['admin'=>$post->id]) }}" method="GET">
+            @csrf
            
             <button name="edit" type="submit" title="Edit" class="btn btn-xs btn-default edit-row" >
               <i class="fa fa-edit"></i>
-            </button>
-      
-            
+            </button> 
+            </form>
           </td>
           <td colspan="2">
+
           <form id="form-delete" 
             action="{{ route('admin.destroy',['admin'=>$post->id]) }}" method="POST">
             @csrf
@@ -41,8 +43,6 @@
           <td>{{$post->category->title}}</td>
           <td><abbr title="{{$post->dateFormatted(true)}}">{{$post->dateFormatted()}}</abbr> | {!!$post->publicationLabel()!!}</td>
         </tr>
-       
-        
        
       @endforeach
      

@@ -21,7 +21,7 @@
            
             <button   
                 type="submit"                
-                title="refresh" class="btn btn-xs btn-default edit-row" >
+                title="restore" class="btn btn-xs btn-default edit-row" >
               <i class="fa fa-refresh"></i>
             </button>
             </form>

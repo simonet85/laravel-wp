@@ -30,21 +30,51 @@ class BackendController extends Controller
     public function index(Request $request)
     {
        
-        
+        $onlyTrashed = FALSE;
         if( ($status  = $request->get('status') ) && $status == 'trash'){
            
             $posts = Post::onlyTrashed()->with('category', 'author')->latest()->paginate($this->limit);
             $countItem = Post::onlyTrashed()->count();
             $onlyTrashed = TRUE;
-        }else{
+
+        }else if( $status == 'published' ){
+
+            $posts = Post::published()->with('category', 'author')->latest()->paginate($this->limit);
+            $countItem = Post::published()->count();
+
+        }else if( $status == 'scheduled'){
+
+            $posts = Post::scheduled()->with('category', 'author')->latest()->paginate($this->limit);
+            $countItem = Post::scheduled()->count();
+            
+        }else if( $status == 'draft'){
+
+            $posts = Post::draft()->with('category', 'author')->latest()->paginate($this->limit);
+            $countItem = Post::draft()->count();
+            
+        }
+        else{
             $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
             $countItem = Post::count();
-            $onlyTrashed = FALSE;
+           
         }
 
-        return view('admin.index', compact('posts', 'countItem', 'onlyTrashed'));
+        $statusList = $this->statusList();
+
+        return view('admin.index', compact('posts', 'countItem', 'onlyTrashed', 'statusList'));
     }
         
+    public function statusList(){
+
+        return [
+            'all' => Post::count(),
+            'trash' => Post::onlyTrashed()->count(),
+            'published' => Post::published()->count(),
+            'scheduled' => Post::scheduled()->count(),
+            'draft' => Post::draft()->count(),
+        ];
+
+    }
        
 
     /**
@@ -183,7 +213,11 @@ class BackendController extends Controller
         }
 
         $post = Post::find($id);
-        $post->update([
+        $oldImage = $post->image;
+        if ($oldImage !== $post->image) {
+            $this->removeImage(  $oldImage );
+        }
+        $data = [
             "title"=>$request->title,
             "slug"=>$request->slug,
             "published_at" => $request->published_at,
@@ -192,7 +226,9 @@ class BackendController extends Controller
             "body"=>$request->body,
             "author_id"=>auth()->user()->id,
             "image" => $fileName,
-        ]);
+        ];
+       
+        $post->update( $data );
 
         // $request->user()->posts()->create();
 
@@ -200,6 +236,15 @@ class BackendController extends Controller
         notify()->success('Success!', 'Post Updated');
         return redirect()->route('admin.index');
 
+    }
+
+
+    private function removeImage( $image ){
+       
+        if(!empty($image)){
+            $imagePath = public_path('/assets/frontend/img').'/'.$image;
+            if( file_exists($imagePath)) unlink( $imagePath ); 
+        }
     }
 
     
@@ -214,8 +259,8 @@ class BackendController extends Controller
         // dd($id);   
         $post = Post::withTrashed()->findOrFail($id);
         $post->restore();
-        notify()->info('Post removed trash ...');
-        return redirect('admin');
+        notify()->info('Post removed from trash ...');
+        return redirect()->back();
     }
 
     /**
@@ -241,7 +286,9 @@ class BackendController extends Controller
     public function forcedestroy($id)
     {
         
-        Post::withTrashed()->findOrfail($id)->forceDelete();
+        $post = Post::withTrashed()->findOrfail($id);
+        $post->forceDelete();
+        $this->removeImage($post->image);
         // session()->flash('trash-message', 'Post Moved to Trash ...');
         notify()->success('Success!', 'Post Deleted successfully');
         return redirect('/trash/?status=trash');

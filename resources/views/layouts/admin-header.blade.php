@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css')}}" />
 
   <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css')}}" />
+  <link rel="stylesheet" href="{{asset('assets/backend/css/custom.css')}}">
   
   @notify_css
 

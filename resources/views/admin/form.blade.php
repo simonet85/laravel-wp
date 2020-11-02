@@ -89,11 +89,12 @@
                   </div>
                   <div class="box-footer clearfix">
                       <div class="pull-left">
-                          <a href="{{ route('admin.store')}}" onclick="draftFunction(event);" class="btn btn-default">Save Draft</a>
+                          <a href="{{ route('admin.store')}}" onclick="draftFunction(event);" class="btn btn-warning">Save Draft</a>
                       </div>
                       <div class="pull-right">
                           <a href="{{ route('admin.store')}}" class="btn btn-primary" 
-                          onclick="event.preventDefault(); document.getElementById('form-submit').submit();">Publish</a>
+                          onclick="event.preventDefault(); 
+                          document.getElementById('form-submit').submit();">Publish</a>
                       </div>
                   </div>
               </div>
@@ -129,7 +130,7 @@
                           <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                           <div>
                             <span class="btn btn-outline-secondary btn-file"><span class="fileinput-new btn btn-primary">Select image</span><span class="fileinput-exists btn btn-warning">Change</span><input type="file" name="image"></span>
-                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+                            <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Remove</a>
                           </div>
                         </div>
                       </div>
