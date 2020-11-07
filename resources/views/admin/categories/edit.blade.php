@@ -2,6 +2,11 @@
 @section('admin-content')
     <!-- Main content -->
     <section class="content">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+        <li class="breadcrumb-item"><a href="#">Users</a></li>
+        <li class="breadcrumb-item active">Edit</li>
+      </ol>
         <div class="row">
           <div class="col-xs-9">
               <div class="box">

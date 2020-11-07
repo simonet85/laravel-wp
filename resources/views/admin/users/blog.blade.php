@@ -4,6 +4,11 @@
     <section class="content">
         <div class="row">
           <div class="col-xs-12">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Admin</a></li>
+              <li class="breadcrumb-item"><a href="#">Users</a></li>
+              <li class="breadcrumb-item active">Home</li>
+            </ol>
             <div class="box">
                 <div class="box-header">
                     <div class="pull-left">

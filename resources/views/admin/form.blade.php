@@ -3,6 +3,11 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Blog</a></li>
+            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+            <li class="breadcrumb-item active">Add</li>
+          </ol>
           <div class="col-xs-9">
               <div class="box">
                   <!-- form start -->

@@ -30,12 +30,16 @@ Route::get('/post', function () {
 // });
 Auth::routes();
 
-Route::get('/home', 'Backend\HomeController@index')->name('home');
-Route::resource('admin', 'Backend\BackendController');
-Route::put('/admin/restore/{id}', 'Backend\BackendController@restore')->name('admin.restore');
+Route::group(['middleware' => ['check-permission']], function () {
 
-Route::get('/trash', 'Backend\BackendController@index')->name('trash');
+    Route::get('/home', 'Backend\HomeController@index')->name('home');
+    Route::resource('admin', 'Backend\BackendController')->names(['admini'=>'admini.create']);
+    Route::put('/admin/restore/{id}', 'Backend\BackendController@restore')->name('admin.restore');
 
-Route::delete('/admin/force-destroy/{id}', 'Backend\BackendController@forcedestroy')->name('admin.force-destroy');
-Route::resource('categories', 'Backend\CategoryController');
-Route::resource('users', 'Backend\UserController');
+    Route::get('/trash', 'Backend\BackendController@index')->name('trash');
+
+    Route::delete('/admin/force-destroy/{id}', 'Backend\BackendController@forcedestroy')->name('admin.force-destroy');
+    Route::resource('categories', 'Backend\CategoryController');
+    Route::resource('users', 'Backend\UserController');
+    
+});

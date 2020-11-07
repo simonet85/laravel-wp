@@ -2,7 +2,7 @@
     <thead>
         <tr>
           <th>Action</th>
-          <th></th>
+         
           <th>Title</th>
           <th>Author</th>
           <th>Category</th>
@@ -11,31 +11,46 @@
     </thead>
     <tbody>
      {{-- {{dd($posts)}} --}}
+     <?php $request = request();?>
       @foreach($posts as $post)
+      
         <tr>
+
           <td width="70">
-            <form 
+            <form style="display: inline-block;"
             action="{{ route('admin.edit',['admin'=>$post->id]) }}" method="GET">
             @csrf
            
+            @if( check_users_permissions( request(),'Backend@edit', $post->id) )
             <button name="edit" type="submit" title="Edit" class="btn btn-xs btn-default edit-row" >
               <i class="fa fa-edit"></i>
             </button> 
+            @else
+            <button name="edit" type="submit" title="Edit" class="btn btn-xs btn-default edit-row disabled" >
+              <i class="fa fa-edit"></i>
+            </button> 
+            @endif
             </form>
-          </td>
-          <td colspan="2">
+         
 
-          <form id="form-delete" 
+          <form id="form-delete" style="display: inline-block;"
             action="{{ route('admin.destroy',['admin'=>$post->id]) }}" method="POST">
             @csrf
             @method("DELETE")
 
+            @if( check_users_permissions( request(),'Backend@destroy', $post->id) )
             <button name="delete" type="submit" title="Delete" class="btn btn-xs btn-danger delete-row" 
             onsubmit="return confirm('Do you really want to delete?');"
             >
-              <i class="fa fa-times"></i>
+              <i class="fa fa-trash-o"></i>
             </button>
-           
+            @else
+            <button name="delete" type="submit" title="Delete" class="btn btn-xs btn-danger delete-row disabled" 
+            onsubmit="return confirm('Do you really want to delete?');"
+            >
+              <i class="fa fa-trash-o"></i>
+            </button>
+           @endif
           </form>
           </td>
           <td>{{$post->title}}</td>

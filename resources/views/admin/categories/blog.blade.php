@@ -3,6 +3,11 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+            <li class="breadcrumb-item"><a href="#">Categories</a></li>
+            <li class="breadcrumb-item active">Home</li>
+          </ol>
           <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">

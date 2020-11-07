@@ -6,10 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, LaratrustUserTrait;
 
     /**
      * The attributes that are mass assignable.

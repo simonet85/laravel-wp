@@ -19,6 +19,7 @@ class BackendController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('check-permission');
     }
 
     /**
@@ -52,21 +53,26 @@ class BackendController extends Controller
             $posts = Post::draft()->with('category', 'author')->latest()->paginate($this->limit);
             $countItem = Post::draft()->count();
             
-        }
-        else{
+        }else if( $status == 'own'){
+
+            $posts = $request->user()->posts()->with('category', 'author')->latest()->paginate($this->limit);
+            $countItem = $request->user()->posts()->count();
+            
+        }else{
             $posts = Post::with('category', 'author')->latest()->paginate($this->limit);
             $countItem = Post::count();
            
         }
 
-        $statusList = $this->statusList();
-
+        $statusList = $this->statusList($request);
+        
         return view('admin.index', compact('posts', 'countItem', 'onlyTrashed', 'statusList'));
     }
         
-    public function statusList(){
+    public function statusList($request){
 
         return [
+            'own'=> $request->user()->posts()->count(),
             'all' => Post::count(),
             'trash' => Post::onlyTrashed()->count(),
             'published' => Post::published()->count(),

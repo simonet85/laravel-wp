@@ -11,6 +11,7 @@
     </thead>
     <tbody>
      {{-- {{dd($posts)}} --}}
+     <?php $request = request();?>
       @foreach($posts as $post)
         <tr>
           <td width="70">
@@ -19,11 +20,19 @@
             @csrf
             @method("PUT")
            
+            @if( check_users_permissions( $request,'Backend@restore', $post->id) )
             <button   
                 type="submit"                
                 title="restore" class="btn btn-xs btn-default edit-row" >
               <i class="fa fa-refresh"></i>
             </button>
+            @else
+            <button   
+                type="submit"                
+                title="restore" class="btn btn-xs btn-default edit-row disabled" >
+              <i class="fa fa-refresh"></i>
+            </button>
+            @endif
             </form>
             
           </td>
@@ -33,10 +42,16 @@
             @csrf
             @method("DELETE")
 
+            @if( check_users_permissions( $request,'Backend@forcedestroy', $post->id) )
             <button name="delete" type="submit" title="Delete" class="btn btn-xs btn-danger delete-row" onclick="return confirm('Do you want to parmently delete the post?');">
-              <i class="fa fa-times"></i>
+              <i class="fa fa-trash-o"></i>
+             
             </button>
-           
+            @else
+            <button name="delete" type="submit" title="Delete" class="btn btn-xs btn-danger delete-row disabled" onclick="return confirm('Do you want to parmently delete the post?');">
+              <i class="fa fa-trash-o"></i>
+            </button>
+            @endif
           </form>
           </td>
           <td>{{$post->title}}</td>
