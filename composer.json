@@ -16,9 +16,11 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "santigarcor/laratrust": "5.2.*",
-        "yoeunes/notify": "^1.0"
+        "yoeunes/notify": "^1.0",
+        "maximebf/debugbar": "1.*"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.4.0",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",

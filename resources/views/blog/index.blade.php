@@ -7,24 +7,24 @@
             {{-- Display category name --}}
             @if( isset($categoryName))
                 <div class="alert alert-info text-center">
-                <p>Category : <strong>{{$categoryName}}</strong> </p>
+                    <p>Category : <strong>{{$categoryName}}</strong> </p>
                 </div>
             @endif
             {{-- Display Author name --}}
             @if( isset($authorName))
-            <div class="alert alert-info text-center">
-            <p>Author : <strong>{{$authorName}}</strong> </p>
-            </div>
+                <div class="alert alert-info text-center">
+                    <p>Author : <strong>{{$authorName}}</strong> </p>
+                </div>
             @endif
             {{-- Display search results --}}
             @if( $search = request('search') )
-            <div class="alert alert-info text-center">
-                <p>Search results : <strong>{{$search}}</strong> </p>
-            </div>
+                <div class="alert alert-info text-center">
+                    <p>Search results : <strong>{{$search}}</strong> </p>
+                </div>
             @else
-            <div class="alert alert-danger text-center">
-                <p><strong>Not Found!</strong> </p>
-            </div>
+                <div class="alert alert-danger text-center">
+                    <p><strong>Not Found!</strong> </p>
+                </div>
             @endif
            
 
@@ -63,7 +63,7 @@
          
 
             <nav>
-              {{$posts->links()}}
+              {{$posts->appends(request()->only(['search']))->links()}}
             </nav>
         </div>
         {{-- Sidebar --}}
