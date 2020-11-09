@@ -62,5 +62,29 @@ class Post extends Model
             return '<span class="label label-success">Published</span>';
         }
     }
+
+    public function scopeFilter( $query, $search){
+
+        if (isset(  $search )) {
+
+        $query->where( function( $q ) use ( $search ){
+
+            // Search for the author in query
+                $q->whereHas('author', function($qr) use ( $search ){
+                    $qr->where('name','LIKE', "%{$search}%");
+                })->get();
+            // Search for the author in query
+                $q->orWhereHas('category', function($qr) use ( $search ){
+                    $qr->where('title','LIKE', "%{$search}%");
+                })->get();
+             // Search for the title in query
+                $q->orWhere('title','LIKE', "%{$search}%")->get();
+             // Search for the excerpt in query
+                $q->orWhere('excerpt','LIKE', "%{$search}%")->get();
+                
+            });
+
+        }
+    }
     
 }

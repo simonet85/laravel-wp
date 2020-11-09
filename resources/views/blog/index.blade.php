@@ -21,13 +21,8 @@
                 <div class="alert alert-info text-center">
                     <p>Search results : <strong>{{$search}}</strong> </p>
                 </div>
-            @else
-                <div class="alert alert-danger text-center">
-                    <p><strong>Not Found!</strong> </p>
-                </div>
             @endif
-           
-
+          
             @foreach($posts as $post)
             <article class="post-item">
                 @if(!file_exists( public_path().'/assets/frontend/img'.$post->image ))
