@@ -41,5 +41,7 @@ Route::group(['middleware' => ['check-permission']], function () {
     Route::delete('/admin/force-destroy/{id}', 'Backend\BackendController@forcedestroy')->name('admin.force-destroy');
     Route::resource('categories', 'Backend\CategoryController');
     Route::resource('users', 'Backend\UserController');
-    
+
 });
+
+Route::resource('accounts', 'Backend\AccountController');

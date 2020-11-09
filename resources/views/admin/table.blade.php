@@ -21,7 +21,7 @@
             action="{{ route('admin.edit',['admin'=>$post->id]) }}" method="GET">
             @csrf
            
-            @if( check_users_permissions( request(),'Backend@edit', $post->id) )
+            @if( check_users_permissions( $request,'Backend@edit', $post->id) )
             <button name="edit" type="submit" title="Edit" class="btn btn-xs btn-default edit-row" >
               <i class="fa fa-edit"></i>
             </button> 
@@ -38,7 +38,7 @@
             @csrf
             @method("DELETE")
 
-            @if( check_users_permissions( request(),'Backend@destroy', $post->id) )
+            @if( check_users_permissions( $request,'Backend@destroy', $post->id) )
             <button name="delete" type="submit" title="Delete" class="btn btn-xs btn-danger delete-row" 
             onsubmit="return confirm('Do you really want to delete?');"
             >

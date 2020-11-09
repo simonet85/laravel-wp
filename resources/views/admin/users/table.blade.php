@@ -3,6 +3,7 @@
         <tr>
           <th>Action</th>
           <th>Users Name</th>
+          <th class="text-center">Roles</th>
           <th class="text-center">Users Posts Count</th>
         </tr>
     </thead>
@@ -37,6 +38,7 @@
             </form>
           </td>
           <td>{{$user->name}}</td>
+        <td class="text-center">{{$user->roles->first()->display_name}}</td>
           <td class="text-center">  <p class="badge badge-info"> {{$user->posts->count()}}</p></td>
         </tr>
        

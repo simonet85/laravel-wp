@@ -12,7 +12,7 @@
             
               <div class="box">
                 <form id="form-submit" role="form" method="POST"  
-                action="{{ route('users.update',["user"=>$user->id])}}" enctype="multipart/form-data" >
+                action="{{ route('accounts.update',["user"=>$user->id])}}" enctype="multipart/form-data" >
                   @csrf
                   @method("PUT")
                       <div class="box-body">
@@ -29,7 +29,7 @@
 
                       <div class="form-group @error('slug') has-error  @enderror">
                         <label for="slug">Slug</label>
-                        <input value="{{$user->slug}}" type="text" name="slug" placeholder="Example: something-beautyful" id="slug" class="form-control"
+                        <input value="{{$user->slug}}" type="text" name="slug" placeholder="Example: something-beautyful" id="text" class="form-control"
                         aria-labelledby="slug">
                         @error('slug')
                         <span class="help-block " id="slug">
@@ -68,30 +68,6 @@
                           @error('password_confirm')
                           <span class="help-block " id="password_confirm">
                             {{$errors->first('password_confirm')}}
-                          </span>
-                          @enderror
-                        </div>
-
-                        <div class="form-group @error('role') has-error  @enderror">
-                          <label for="title">User Role</label>
-                          <?php $roles = \App\Role::pluck('display_name', 'id');?>
-
-                          <select class="form-control" name="role" id="role" aria-labelledby="role">
-                              {{-- <option value="" selected>Select user role</option> --}}
-                            @foreach ($roles as $key => $value)
-                            
-                            <option  value="{{$key}}" 
-                              {{ ( $key == $user->roles()->first()->id) ? 'selected ' : '' }}
-                            >
-                               {{$value}}
-                            </option>
-                         
-                            @endforeach
-                          </select>
-
-                          @error('role')
-                          <span class="help-block " id="role">
-                              {{$errors->first('role')}}
                           </span>
                           @enderror
                         </div>

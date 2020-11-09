@@ -59,6 +59,27 @@
                     </span>
                     @enderror
 
+                  </div>
+
+                  <div class="form-group @error('role') has-error  @enderror">
+                    <label for="title">User Role</label>
+                    <?php $roles = \App\Role::pluck('display_name', 'id');?>
+
+                    <select class="form-control" name="role" id="role" aria-labelledby="role">
+                        <option value="" selected>Select user role</option>
+                      @foreach ($roles as $key => $value)
+                        <option value="{{$key}}">{{$value}}</option>
+                      @endforeach
+                    </select>
+
+                    @error('role')
+                    <span class="help-block " id="role">
+                        {{$errors->first('role')}}
+                    </span>
+                    @enderror
+                  </div>
+
+                 
                 </div>
               </div>
                     <!-- /.box-body --> 
