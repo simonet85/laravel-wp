@@ -23,8 +23,20 @@ class BlogController extends Controller
 
        
         $posts = Post::with('author')->latestFirst()
-                                    ->published()
-                                    ->simplePaginate($this->limit);
+                                    ->published();
+        $search = request('search');
+        if (isset(  $search )) {
+
+        $posts->where( function( $q ) use ( $search ){
+
+                $q->where('title','LIKE', "%{$search}%")->get();
+                $q->orWhere('excerpt','LIKE', "%{$search}%")->get();
+                
+            });
+            
+        }
+
+        $posts = $posts->simplePaginate($this->limit);
       
         return view('blog.index')->with('posts', $posts)
                            ->with('categories', $categories);

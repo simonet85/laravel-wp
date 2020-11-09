@@ -4,16 +4,30 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            {{-- Display category name --}}
             @if( isset($categoryName))
                 <div class="alert alert-info text-center">
                 <p>Category : <strong>{{$categoryName}}</strong> </p>
                 </div>
             @endif
+            {{-- Display Author name --}}
             @if( isset($authorName))
             <div class="alert alert-info text-center">
             <p>Author : <strong>{{$authorName}}</strong> </p>
             </div>
             @endif
+            {{-- Display search results --}}
+            @if( $search = request('search') )
+            <div class="alert alert-info text-center">
+                <p>Search results : <strong>{{$search}}</strong> </p>
+            </div>
+            @else
+            <div class="alert alert-danger text-center">
+                <p><strong>Not Found!</strong> </p>
+            </div>
+            @endif
+           
+
             @foreach($posts as $post)
             <article class="post-item">
                 @if(!file_exists( public_path().'/assets/frontend/img'.$post->image ))
