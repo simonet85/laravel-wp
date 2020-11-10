@@ -26,6 +26,11 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function comments(){
+
+        return $this->hasMany(Comment::class);
+    }
+
     public function getDateAttribute( $value ){
         return is_null($this->published_at) ? ' ' : $this->published_at->diffForHumans();
     }
