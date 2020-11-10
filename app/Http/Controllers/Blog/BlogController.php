@@ -21,10 +21,9 @@ class BlogController extends Controller
         $categories = Category::with(['posts' => function($query){
             $query->published();
         }])->orderBy('title', 'asc')->get();
-
        
         $posts = Post::with('author')->latestFirst()
-                                     ->filter( request('search') )
+                                     ->filter( request(['search', 'month', 'year']) )
                                      ->published()
                                      ->simplePaginate($this->limit);
       

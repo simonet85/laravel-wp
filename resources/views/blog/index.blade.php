@@ -27,6 +27,12 @@
                 <div class="alert alert-info text-center">
                     <p>Search results : <strong>{{$search}}</strong> </p>
                 </div>
+            @elseif(empty($search))
+                <p></p>
+            @else
+                <div class="alert alert-info text-center">
+                    <p><strong class="display-1">Not Found !</strong> </p>
+                </div>
             @endif
           
             @foreach($posts as $post)
@@ -69,7 +75,7 @@
          
 
             <nav>
-              {{$posts->appends(request()->only(['search']))->links()}}
+              {{$posts->appends(request()->only(['search','month', 'year']))->links()}}
             </nav>
         </div>
         {{-- Sidebar --}}

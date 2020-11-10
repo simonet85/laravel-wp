@@ -76,30 +76,44 @@ class Post extends Model
         }
     }
 
-    public function scopeFilter( $query, $search){
+    public function scopeFilter( $query, $filter){
 
-        if (isset(  $search )) {
+        
 
-        $query->where( function( $q ) use ( $search ){
-
-            // Search for the author in query
-                $q->whereHas('author', function($qr) use ( $search ){
-                    $qr->where('name','LIKE', "%{$search}%");
-                })->get();
-            // Search for the author in query
-                $q->orWhereHas('category', function($qr) use ( $search ){
-                    $qr->where('title','LIKE', "%{$search}%");
-                })->get();
-                // Search for the author in query
-                $q->orWhereHas('tags', function($qr) use ( $search ){
-                    $qr->where('name','LIKE', "%{$search}%");
-                })->get();
-             // Search for the title in query
-                $q->orWhere('title','LIKE', "%{$search}%")->get();
-             // Search for the excerpt in query
-                $q->orWhere('excerpt','LIKE', "%{$search}%")->get();
+           
+            if (isset( $filter['month'] ) && $month = $filter['month']) {
+               
+                $query->whereRaw( 'MONTH(published_at) = ?', [Carbon::parse($month)->month])->get();
+            }
+    
+            if (isset(  $filter['year'] ) && $year = $filter['year']) {
+               
+                $query->whereRaw( "YEAR(published_at) = ?", [Carbon::parse($year)->year])->get();
                 
-            });
+            }
+
+            if (isset(  $filter['search'] ) && $search = $filter['search']) {
+        
+            $query->where( function( $q ) use ( $search ){
+
+                // Search for the author in query
+                    $q->whereHas('author', function($qr) use ( $search ){
+                        $qr->where('name','LIKE', "%{$search}%");
+                    })->get();
+                // Search for the author in query
+                    $q->orWhereHas('category', function($qr) use ( $search ){
+                        $qr->where('title','LIKE', "%{$search}%");
+                    })->get();
+                    // Search for the author in query
+                    $q->orWhereHas('tags', function($qr) use ( $search ){
+                        $qr->where('name','LIKE', "%{$search}%");
+                    })->get();
+                // Search for the title in query
+                    $q->orWhere('title','LIKE', "%{$search}%")->get();
+                // Search for the excerpt in query
+                    $q->orWhere('excerpt','LIKE', "%{$search}%")->get();
+                    
+                });
 
         }
     }

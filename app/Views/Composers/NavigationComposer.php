@@ -12,6 +12,7 @@ class NavigationComposer{
        $this->composeCategories($view);
        $this->composePopularPosts($view);
        $this->composeTags($view);
+       $this->composeArchives($view);
     }
 
     public function composeCategories( View $view ){
@@ -30,8 +31,18 @@ class NavigationComposer{
 
     }
 
-    public function composeTags( View $view){
+    private function composeTags( View $view){
         $tags = Tag::has('posts')->get();
         $view->with('tags', $tags);
+    }
+
+    private function composeArchives( View $view){
+        $archives =  Post::selectRaw('count(id) as post_count, year(published_at) year, monthname(published_at) month')
+        ->published()
+        ->groupBy('year', 'month')
+        ->orderByRaw('min(published_at) desc')
+        ->get();
+        $view->with('archives', $archives);
+       
     }
 }
