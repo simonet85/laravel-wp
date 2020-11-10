@@ -24,6 +24,7 @@ Route::get('/', ['uses'=>'Blog\BlogController@index', 'as'=>'blog']);
 Route::get('/post', function () {
     return view('blog.post');
 });
+Route::get('/blog/tag/{tag}','Blog\BlogController@tag')->name('tag');
 
 // Route::get('/404', function () {
 //     return view('errors.404');

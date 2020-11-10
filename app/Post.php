@@ -12,6 +12,10 @@ class Post extends Model
     protected $guarded = [];
     protected $dates = ['published_at'];
 
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function author(){
 
         return $this->belongsTo(User::class);
@@ -24,6 +28,15 @@ class Post extends Model
 
     public function getDateAttribute( $value ){
         return is_null($this->published_at) ? ' ' : $this->published_at->diffForHumans();
+    }
+
+    public function getTagsHtmlAttribute(){
+        $anchors = [];
+        foreach($this->tags as $tag){
+
+            $anchors[] = '<a href="'.route("tag",["tag"=>$tag->slug]).'">'.$tag->name.'</a>';
+        }
+      return implode(",",$anchors);
     }
 
     public function scopeLatestFirst($query){
@@ -76,6 +89,10 @@ class Post extends Model
             // Search for the author in query
                 $q->orWhereHas('category', function($qr) use ( $search ){
                     $qr->where('title','LIKE', "%{$search}%");
+                })->get();
+                // Search for the author in query
+                $q->orWhereHas('tags', function($qr) use ( $search ){
+                    $qr->where('name','LIKE', "%{$search}%");
                 })->get();
              // Search for the title in query
                 $q->orWhere('title','LIKE', "%{$search}%")->get();

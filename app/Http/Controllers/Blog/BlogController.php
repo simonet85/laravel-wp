@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Blog;
 
+use App\Tag;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
@@ -33,6 +34,29 @@ class BlogController extends Controller
         //  view('blog.index')->with('posts', $posts)->render();
         // dd(\DB::getQueryLog());
     }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+   
+    public function tag( Tag $tag )
+    {
+        $tagName = $tag->name;
+
+        $posts = Post::with('author')->latestFirst()
+                                     ->filter( request('search') )
+                                     ->published()
+                                     ->simplePaginate($this->limit);
+      
+        return view('blog.index')->with('posts', $posts)
+                           ->with('tagName', $tagName);
+        // \DB::enableQueryLog();
+        //  view('blog.index')->with('posts', $posts)->render();
+        // dd(\DB::getQueryLog());
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -106,4 +130,6 @@ class BlogController extends Controller
     {
         //
     }
+
+
 }
