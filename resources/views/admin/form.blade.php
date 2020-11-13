@@ -123,24 +123,48 @@
                   </div>
                  
               </div>
+
               <div class="box">
-                  <div class="box-header with-border">
-                      <h3 class="box-title">Feature Image</h3>
-                  </div>
-                  <div class="box-body text-center">
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                          <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
-                            <img src="https://via.placeholder.com/200x150?text=No+Image"  alt="feature image">
-                          </div>
-                          <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                          <div>
-                            <span class="btn btn-outline-secondary btn-file"><span class="fileinput-new btn btn-primary">Select image</span><span class="fileinput-exists btn btn-warning">Change</span><input type="file" name="image"></span>
-                            <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Remove</a>
-                          </div>
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tags</h3>
+                </div>
+
+                <div class="form-group @error('tag_id') has-error  @enderror">
+
+                  <select multiple="multiple"  class="form-control js-example-basic-multiple" name="tag_id[]" id="tag_id" aria-labelledby="tag_id" >
+                    
+                    @foreach($tags as $tag)
+                    <option value="{{$tag->id}}" >{{$tag->name}}</option>
+                    @endforeach
+
+                  </select>
+                  @error('tag_id')
+                  <span class="help-block " id="tag_id">
+                    {{$errors->first('tag_id')}}
+                  </span>
+                  @enderror
+                </div>
+               
+            </div>
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Feature Image</h3>
+                </div>
+                <div class="box-body text-center">
+                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
+                          <img src="https://via.placeholder.com/200x150?text=No+Image"  alt="feature image">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                        <div>
+                          <span class="btn btn-outline-secondary btn-file"><span class="fileinput-new btn btn-primary">Select image</span><span class="fileinput-exists btn btn-warning">Change</span><input type="file" name="image"></span>
+                          <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Remove</a>
                         </div>
                       </div>
-                  </div>
-              </div>
+                    </div>
+                </div>
+            </div>
           </div>
         
         </form>
@@ -186,4 +210,16 @@
       );
   });
 </script>
-  @endsection
+
+<script>
+
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+      placeholder: 'Select tags',
+      theme: "classic",
+      backgroundColor: "#0085ba",
+    });
+});
+
+</script>
+@endsection

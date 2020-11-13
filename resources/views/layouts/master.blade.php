@@ -6,10 +6,13 @@
 
     <link href="{{url('https://fonts.googleapis.com/css?family=Raleway:400,700')}}" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css')}}">
+    
     <link rel="stylesheet" href="{{asset('assets/frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/custom.css')}}">
+    @notify_css
 </head>
 <body>
+
     <header>
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container">
@@ -56,8 +59,16 @@
                 </div>
             </div>
         </div>
+       
     </footer>
     <script src="{{asset('assets/frontend/js/jquery.min.js')}}"></script>
     <script src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
-</body>
+    <link rel="stylesheet" type="text/css" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css')}}">
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')}}"></script>
+    <script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js')}}"></script>
+    @notify_js
+    @notify_render
+  </body>
+  
 </html>

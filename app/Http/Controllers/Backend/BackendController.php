@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Tag;
 use App\Post;
 use App\Category;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
@@ -91,7 +92,9 @@ class BackendController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.form')->with('categories', $categories);
+        $tags = Tag::all();
+        return view('admin.form')->with('categories', $categories)
+                                 ->with('tags', $tags);
     }
 
     /**
@@ -102,7 +105,7 @@ class BackendController extends Controller
      */
     public function store(Request $request)
     {
-    //    dd($request->all());
+      
         $this->validate($request,[
             "title"=>"required|string",
             "slug"=>"required|string|unique:posts",
@@ -111,6 +114,7 @@ class BackendController extends Controller
             "excerpt"=>"required|string",
             "image"=>"mimes:jpeg,png,bmp,jpg|nullable",
             "body"=>"required|string",
+            "tag_id"=>"required"
         ]);
 
         if ($request->hasFile('image')) {
@@ -128,8 +132,14 @@ class BackendController extends Controller
             }
         }
 
-      
-        $create = Post::create([
+    //   $data = $request->all();
+    //   $author_id = auth()->user()->id;
+    //   $data["image"] = $fileName;
+    //   $data["author_id"] = $author_id;
+
+      $tag = $request->tag_id;
+     
+        $post = Post::create([
             "title"=>$request->title,
             "slug"=>$request->slug,
             "published_at" => $request->published_at,
@@ -139,7 +149,12 @@ class BackendController extends Controller
             "author_id"=>auth()->user()->id,
             "image" => $fileName,
         ]);
-
+        // $post->tags()->detach($tag_ids);
+        for($i = 0 ; $i < sizeof($tag); $i++){
+            $post->tags()->detach($tag[$i]);
+            $post->tags()->attach($tag[$i]);
+        }
+     
         // $request->user()->posts()->create();
 
         // session()->flash('success', 'Post Created');

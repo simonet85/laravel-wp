@@ -25,6 +25,7 @@ Route::get('/post', function () {
     return view('blog.post');
 });
 Route::get('/blog/tag/{tag}','Blog\BlogController@tag')->name('tag');
+Route::post('/blog/comment/', 'Blog\BlogController@comment')->name('comments');
 
 // Route::get('/404', function () {
 //     return view('errors.404');
@@ -41,6 +42,7 @@ Route::group(['middleware' => ['check-permission']], function () {
 
     Route::delete('/admin/force-destroy/{id}', 'Backend\BackendController@forcedestroy')->name('admin.force-destroy');
     Route::resource('categories', 'Backend\CategoryController');
+    Route::resource('tags', 'Backend\TagsController');
     Route::resource('users', 'Backend\UserController');
 
 });

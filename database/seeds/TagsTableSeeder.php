@@ -71,7 +71,7 @@ class TagsTableSeeder extends Seeder
                 $post->tags()->detach($tags[$i]);
                 $post->tags()->attach($tags[$i]);
             }
-        }
+        } 
 
         
     }

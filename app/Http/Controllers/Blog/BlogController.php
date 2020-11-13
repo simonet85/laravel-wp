@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Blog;
 
 use App\Tag;
 use App\Post;
+use App\Comment;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 
 class BlogController extends Controller
 {
@@ -62,9 +64,32 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function comment(Post $post, Request $request)
     {
-        //
+        
+        $request->validate([
+            "author_name" =>"required|string",
+            "author_email" =>"email" ,
+            "author_url" => "nullable",
+            "body" =>"required",
+        ]);
+
+        $data = $request->all();
+        $post = $post->find($request->get('post_id'));
+       
+        $data["post_id"] = $post->id;
+       
+        $comment = Comment::create($data);
+
+        if($comment instanceof Model){
+            notify()->success('Success!', 'Comment Added');
+            return redirect()->back();
+        }else{
+
+            notify()->error('Error!', 'Comment Can\'t Added');
+            return redirect()->route('blog.show',['blog'=>$post->id]);
+        }
+      
     }
 
     /**
@@ -86,14 +111,16 @@ class BlogController extends Controller
      */
     public function show(Post $post)
     {
-        // $categories = Category::with(['posts' => function($query){
-        //     $query->published();
-        // }])->orderBy('title', 'asc')->get();
+        $categories = Category::with(['posts' => function($query){
+        $query->published();
+        }])->orderBy('title', 'asc')->get();
         
         // $post  = Post::published()->findOrFail($id);
         $post->increment( 'view_count' );
-        return view('blog.post')->with('post', $post)
-                                ->with('categories');
+        $postComments = $post->comments()->simplePaginate(3);
+        return view('blog.show')->with('post', $post)
+                                ->with('categories',$categories)
+                                ->with('postComments',$postComments);
     }
 
     /**

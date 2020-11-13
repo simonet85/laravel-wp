@@ -54,6 +54,7 @@
             </div>
             <div class="widget-body">
                 <ul class="tags">
+                  
                     @foreach($tags as $tag)
                     <li><a href="{{route('tag',["tag"=>$tag->slug])}}">{{$tag->name}}</a></li>
                     @endforeach

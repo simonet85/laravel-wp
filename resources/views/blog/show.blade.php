@@ -30,7 +30,11 @@
                                 <i class="fa fa-tag"></i>
                                 {!! $post->tags_html !!}
                             </li>
-                                <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
+                            <?php $commentNumber = $post->comments->count();?>
+                            <li><i class="fa fa-comments">
+                                </i>
+                                <a href="{{route('blog.show',['blog'=>$post->slug])}}#post-comments">{{ $commentNumber }} {{ str_plural('Comment', $commentNumber)}} </a>
+                            </li>
                             </ul>
                         </div>
 
@@ -43,6 +47,8 @@
             @include('layouts.postauthor')
            
             @include('layouts.comments')
+
+            
         </div>
         @include('layouts.sidebar')
     </div>

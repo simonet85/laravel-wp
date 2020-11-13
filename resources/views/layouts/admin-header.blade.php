@@ -19,12 +19,16 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('assets/backend/css/skins/_all-skins.min.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{asset('assets/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+  {{-- <link rel="stylesheet" href="{{asset('assets/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}"> --}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
   <script src="{{url('https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js')}}"></script>
   <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css')}}" />
 
   <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css')}}" />
+  
+  <link href="{{url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css')}}" rel="stylesheet" />
+  
+  
   <link rel="stylesheet" href="{{asset('assets/backend/css/custom.css')}}">
   
   @notify_css

@@ -20,9 +20,10 @@
           </a>
         </li>
         <li class="treeview">
+
           <a href="#">
             <i class="fa fa-pencil"></i>
-            <span>Blog</span>
+            <span>Posts</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -34,7 +35,31 @@
             <li><a href="{{route('admin.create')}}"><i class="fa fa-circle-o"></i> Add New</a></li>
             
           </ul>
+
         </li>
+
+
+        <ul class="sidebar-menu">
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-tags"></i>
+              <span>Tags</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              
+              <li><a href="{{route('tags.index')}}"><i class="fa fa-circle-o"></i> All Tags</a></li>
+              
+              <li><a href="{{route('tags.create')}}"><i class="fa fa-circle-o"></i> Add New</a></li>
+  
+            </ul>
+            
+          </li>
+         
+        </ul>
+        
         
         @if( check_users_permissions( request(), 'Categories@index') )
         <li><a href="{{route('categories.index')}}"><i class="fa fa-folder"></i> <span>Categories</span></a></li>
@@ -43,7 +68,9 @@
         <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> <span>Users</span></a></li>
         @endif
       </ul>
-     
+
+
+
     </section>
     <!-- /.sidebar -->
   </aside>

@@ -36,7 +36,7 @@
             @endif
           
             @foreach($posts as $post)
-            <article class="post-item">
+            <article class="post-item" id="post-comments">
                 @if(!file_exists( public_path().'/assets/frontend/img'.$post->image ))
                 
                 <div class="post-item-image">
@@ -62,7 +62,10 @@
                                         <i class="fa fa-tag"></i>
                                         {!! $post->tags_html !!}
                                     </li>
-                                <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
+                                    <?php $commentNumber = $post->comments->count();?>
+                                <li><i class="fa fa-comments">
+                                    </i><a href="{{route('blog.show',['blog'=>$post->slug])}}#post-comments"> {{ $commentNumber }} {{ str_plural('Comment', $commentNumber)}} </a>
+                                </li>
                             </ul>
                         </div>
                         <div class="pull-right">
@@ -80,6 +83,7 @@
         </div>
         {{-- Sidebar --}}
         @include('layouts.sidebar')
+
     </div>
 </div>
 
